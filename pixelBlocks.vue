@@ -8,12 +8,12 @@ import { onMounted } from 'vue'
 onMounted(() => {
 	const delayFunction = ms => new Promise(resolve => setTimeout(resolve, ms))
 	document.body.style.overflow = 'hidden'
-
 	window.scrollTo(0, 0)
 	const spaceBox = document.querySelector('.spaceBox')
 	for (let i = 0; i < 3; i++) {
 		const shoots = document.createElement('div')
 		shoots.setAttribute('class', 'laser')
+		shoots.setAttribute('alt', 'lasers')
 		document.body.append(shoots)
 		spaceBox.append(shoots)
 	}
@@ -96,12 +96,14 @@ onMounted(() => {
 		const invader = document.createElement('img')
 		invader.setAttribute('src', '../assets/invader.png')
 		invader.setAttribute('class', 'invaderAnimation')
+		invader.setAttribute('alt', 'invader icon')
 		document.body.append(invader)
 		spaceBox.append(invader)
 		await delayFunction(500)
 		const ship = document.createElement('img')
 		ship.setAttribute('src', '../assets/spaceship.png')
 		ship.setAttribute('class', 'shipAnimation')
+		ship.setAttribute('alt', 'spaceship icon')
 		document.body.append(ship)
 		spaceBox.append(ship)
 		await delayFunction(2800)
@@ -121,7 +123,7 @@ onMounted(() => {
 		.shipAnimation,
 		.invaderAnimation {
 			height: 4em;
-			width: auto;
+			width: 3.4em;
 		}
 		.shipAnimation {
 			animation: shipMoves 2.8s forwards cubic-bezier(0.445, 0.05, 0.55, 0.95);
