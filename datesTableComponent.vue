@@ -144,8 +144,6 @@ const fromTodayFormatted = new Date(fromToday).toISOString().split('T')[0]
 datePickerMax.setDate(datePickerMax.getDate() + 60)
 const maxDateFormatted = datePickerMax.toISOString().split('T')[0]
 
-console.log(fromTodayFormatted)
-
 const fetchData = async () => {
 	try {
 		const response = await axios.get('/displaydata.php')
@@ -198,7 +196,6 @@ const chooseDataFiltered = index => {
 		alert(`Termin został już wybrany!. Limit pojedynczej rezerwacji: ${storeStore.limit}.`)
 	}
 }
-
 const resetDates = () => {
 	storeStore.storedChosenDates = []
 	disabledButtons.value = []
@@ -217,3 +214,4 @@ onMounted(() => {
 	height: 40rem;
 }
 </style>
+
