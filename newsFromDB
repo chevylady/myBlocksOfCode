@@ -1,0 +1,49 @@
+<template>
+<section class="flex flex-col py-6 px-10">
+		<h1 class="mx-auto my-2 text-2xl lg:text-4xl text-teal-400">NEWS</h1>
+		<ProgresBarComponent />
+		<ol data-aos="fade-right" class="relative border-s border-teal-800 dark:border-teal-800">
+				<li class="mb-10 ms-4" v-for="obj in arrayNews" :key="obj.indexWpisu">
+				<div class="px-2 py-2">
+					<div
+						class="absolute w-3 h-3 bg-teal-800 rounded-full mt-1.5 -start-1.5 dark:border-teal-900 dark:bg-teal-800"></div>
+					<time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">{{
+						obj.DataDodania
+					}}</time>
+					<h3 class="text-lg font-semibold text-teal-500 dark:text-white">{{ obj.Tytuł }}</h3>
+					<p class="mb-4 text-base font-normal text-gray-200 dark:text-gray-400">
+						{{ obj.Treść }}
+					</p>
+					<div>
+						<img :src="obj.photo" alt="zdjęcie event" class="w-auto h-40 sm:h-64" />
+					</div>
+				</div>
+			</li>
+		</ol>
+	</section>
+</template>
+<script setup>
+import axios from 'axios'
+import AOS from 'aos'
+
+const arrayNews = ref([])
+
+const fetchData = async () => {
+	try {
+		const response = await axios.get('/newsDatabase.php')
+		arrayNews.value = response.data
+
+		nextTick(() => {
+			AOS.init() // after DOM updated, refresh AOS library
+		})
+	} catch (error) {
+		console.error('Error fetching data:', error)
+	}
+}
+
+onMounted(() => {
+	setTimeout(() => {
+		fetchData()
+	}, 1000)
+})
+</script>
